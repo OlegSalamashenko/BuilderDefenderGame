@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-
-     
     private Camera mainCamera;
     private BuildingTypeListSO buildingTypeList;
     private BuildingTypeSO buildingType;

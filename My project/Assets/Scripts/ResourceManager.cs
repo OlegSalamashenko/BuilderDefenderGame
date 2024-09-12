@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
+    public static ResourceManager Instance { get; private set; }
     private Dictionary<ResourceTypeSO , int > recourceAmountDictionary;
 
     private void Awake()
     {
+        Instance = this;
         recourceAmountDictionary = new Dictionary<ResourceTypeSO, int>();
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
 
@@ -39,5 +41,11 @@ public class ResourceManager : MonoBehaviour
     public void AddResource(ResourceTypeSO resourceType, int amount)
     {
         recourceAmountDictionary[resourceType] += amount;
+        TestLogResourceAmountDictionary();
+    }
+
+    public int GetResourceAmount(ResourceTypeSO resourceType)
+    {
+        return recourceAmountDictionary[resourceType];
     }
 }
