@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BuildingTypeSelectUI : MonoBehaviour
 {
     [SerializeField] private Sprite arrowSprite;
+    [SerializeField] private List<BuildingTypeSO> ignoreBuildingTypeList;
 
     private Dictionary<BuildingTypeSO, Transform> btnTransformDictionary;
     private Transform arrowBtn;
@@ -36,6 +37,9 @@ public class BuildingTypeSelectUI : MonoBehaviour
         index++;
 
         foreach (BuildingTypeSO buildingType in buildingTypeList.list) {
+            if (ignoreBuildingTypeList.Contains(buildingType) ) {
+                continue;
+            }
             Transform btnTransform = Instantiate(btnTemplate,transform);
             btnTransform.gameObject.SetActive(true);
 
@@ -53,9 +57,16 @@ public class BuildingTypeSelectUI : MonoBehaviour
             index++;
         }
     }
-    private void Update() {
+
+    private void Start() {
+        BuildingManager.Instance.OnActiveBuildingTypeChanged += BuildingManager_OnActiveBuildingTypeChanged;
         UpdateActiveBiuldingTypeButton();
     }
+
+    private void BuildingManager_OnActiveBuildingTypeChanged(object sender, BuildingManager.OnActiveBuildingTypeChangedEventArgs e) {
+        UpdateActiveBiuldingTypeButton();
+    }
+
     private void UpdateActiveBiuldingTypeButton() {
         arrowBtn.Find("Select").gameObject.SetActive(false);
         foreach (BuildingTypeSO buildingType in btnTransformDictionary.Keys) {

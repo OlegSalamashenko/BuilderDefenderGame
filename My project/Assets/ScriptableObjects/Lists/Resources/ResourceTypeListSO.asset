@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ResourceTypeListSO
   m_EditorClassIdentifier: 
   list:
-  - {fileID: 11400000, guid: 65ffbef44b73f694ca093ce6feed8538, type: 2}
-  - {fileID: 11400000, guid: 5ca50b30052149749a49eda33ac4f2b6, type: 2}
   - {fileID: 11400000, guid: 2e5582beac455b946ab0ce21506071c0, type: 2}
+  - {fileID: 11400000, guid: 5ca50b30052149749a49eda33ac4f2b6, type: 2}
+  - {fileID: 11400000, guid: 65ffbef44b73f694ca093ce6feed8538, type: 2}
