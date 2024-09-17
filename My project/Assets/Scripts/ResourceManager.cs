@@ -9,17 +9,17 @@ public class ResourceManager : MonoBehaviour
 
     public event EventHandler OnResourceAmountChanged;
 
-    private Dictionary<ResourceTypeSO , int > recourceAmountDictionary;
+    private Dictionary<ResourceTypeSO , int > resourceAmountDictionary;
 
     private void Awake()
     {
         Instance = this;
-        recourceAmountDictionary = new Dictionary<ResourceTypeSO, int>();
+        resourceAmountDictionary = new Dictionary<ResourceTypeSO, int>();
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
 
         foreach (ResourceTypeSO resourceType in resourceTypeList.list)
         {
-            recourceAmountDictionary[resourceType] = 0; 
+            resourceAmountDictionary[resourceType] = 0; 
         }
     }
     private void Update()
@@ -41,12 +41,36 @@ public class ResourceManager : MonoBehaviour
 
     public void AddResource(ResourceTypeSO resourceType, int amount)
     {
-        recourceAmountDictionary[resourceType] += amount;
+        resourceAmountDictionary[resourceType] += amount;
         OnResourceAmountChanged?.Invoke(this,EventArgs.Empty);
     }
 
     public int GetResourceAmount(ResourceTypeSO resourceType)
     {
-        return recourceAmountDictionary[resourceType];
+        return resourceAmountDictionary[resourceType];
+    }
+    public bool CanAfford(ResourceAmount[] resourceAmountArray)
+    {
+        foreach (ResourceAmount resourceAmount in resourceAmountArray)
+        {
+            if (GetResourceAmount(resourceAmount.resourceType) >= resourceAmount.amount)
+            {
+                //Can afford
+            }
+            else
+            {
+                //Can not afford
+                return false;
+            }
+        }
+        // Can afford all
+        return true;
+    }
+    public void SpendResources(ResourceAmount[] resourceAmountArray)
+    {
+        foreach (ResourceAmount resourceAmount in resourceAmountArray)
+        {
+            resourceAmountDictionary[resourceAmount.resourceType] -= resourceAmount.amount;
+        }
     }
 }
