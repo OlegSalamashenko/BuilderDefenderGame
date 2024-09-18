@@ -44,7 +44,7 @@ public class ResourceGenerator : MonoBehaviour
         } else {
             timerMax = (resourceGeneratorData.timerMax / 2f) + resourceGeneratorData.timerMax * (1 - (float)nearbyResourceAmount / resourceGeneratorData.maxResourceamount);
         }
-        Debug.Log("nearbyResourceAmount : " + nearbyResourceAmount + "; " + timerMax);
+      
     }
     private void Update()
     {

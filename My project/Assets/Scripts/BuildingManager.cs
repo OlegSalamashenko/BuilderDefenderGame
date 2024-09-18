@@ -31,11 +31,19 @@ public class BuildingManager : MonoBehaviour
     void Update(){
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (activeBuildingType != null && CanSpawnBiulding(activeBuildingType,UtilsClass.GetMouseWorldPosition())) {
-                if (ResourceManager.Instance.CanAfford(activeBuildingType.constructionResourceCostArray))
+            if (activeBuildingType != null ){
+                if (CanSpawnBiulding(activeBuildingType, UtilsClass.GetMouseWorldPosition(), out string errorMessage))
                 {
-                    ResourceManager.Instance.SpendResources(activeBuildingType.constructionResourceCostArray);
-                    Instantiate(activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+                    if (ResourceManager.Instance.CanAfford(activeBuildingType.constructionResourceCostArray))
+                    {
+                        ResourceManager.Instance.SpendResources(activeBuildingType.constructionResourceCostArray);
+                        Instantiate(activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+                    }else{
+                        TooltipUI.Instance.Show("Can not afford" + activeBuildingType.GetConstructionResourceCostString(),
+                            new TooltipUI.TooltipTimer { timer = 2f });
+                    }
+                }else {
+                    TooltipUI.Instance.Show(errorMessage, new TooltipUI.TooltipTimer { timer = 2f});
                 }
             }
         }
@@ -52,13 +60,16 @@ public class BuildingManager : MonoBehaviour
         return activeBuildingType;
     }
 
-    private bool CanSpawnBiulding(BuildingTypeSO buildingType, Vector3 position ) {
+    private bool CanSpawnBiulding(BuildingTypeSO buildingType, Vector3 position , out string errorMessage) {
         BoxCollider2D boxCollider2D = buildingType.prefab.GetComponent<BoxCollider2D>();
 
         Collider2D[] collider2DArray = Physics2D.OverlapBoxAll(position + (Vector3)boxCollider2D.offset,boxCollider2D.size,0);
 
         bool isAreaClear = collider2DArray.Length == 0;
-        if (!isAreaClear) { return false; }
+        if (!isAreaClear) {
+            errorMessage = "Area is not clear!";
+            return false; 
+        }
 
         collider2DArray = Physics2D.OverlapCircleAll(position, buildingType.minConstructionRadius);
 
@@ -69,6 +80,7 @@ public class BuildingManager : MonoBehaviour
                 //Has a BuildingTypeHolder
                 if (buildingTypeHolder.buildingType == buildingType) {
                     //Theres already a building of this type whith in the constructions radius!
+                    errorMessage = "Too close to another building of the same type!";
                     return false;
                 }
             }
@@ -81,10 +93,11 @@ public class BuildingManager : MonoBehaviour
             BuildingTypeHolder buildingTypeHolder = collider2D.GetComponent<BuildingTypeHolder>();
             if (buildingTypeHolder != null) {
                 //It is building
+                errorMessage = "";
                 return true;
             }
         }
-
+        errorMessage = "Too far from any other building!";
         return false ;
     }
 }
