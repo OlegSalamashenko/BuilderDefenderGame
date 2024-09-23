@@ -24,7 +24,14 @@ public class BuildGhost : MonoBehaviour
             resourceNearByOverlay.Hide();
         } else {
             Show(e.activeBuildingType.sprite);
-            resourceNearByOverlay.Show(e.activeBuildingType.resourceGeneratorData);
+            if (e.activeBuildingType.hasResourceGeneratorData)
+            {
+                resourceNearByOverlay.Show(e.activeBuildingType.resourceGeneratorData);
+            }
+            else
+            {
+                resourceNearByOverlay.Hide();
+            }
         }
     }
 

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6341596089798752291}
   - component: {fileID: -7367158357723731214}
   - component: {fileID: 6013688034868076223}
+  - component: {fileID: -1679240484897944605}
+  - component: {fileID: -8708296234689219090}
   m_Layer: 0
   m_Name: GoldHarvester
   m_TagString: Untagged
@@ -34,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 8573853749753462168}
   - {fileID: 3481923185322621592}
+  - {fileID: 7679878791693420258}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6341596089798752291
@@ -106,6 +109,97 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.219426, y: 4.1363726}
   m_EdgeRadius: 0
+--- !u!114 &-1679240484897944605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070071031976238820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cda9782f00c8354d8a9ee8284d9bd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmountMax: 100
+--- !u!114 &-8708296234689219090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070071031976238820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbd03f6168e84849a75f8f60cce0721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &2522549027971162703
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3488185069551568733}
+    m_Modifications:
+    - target: {fileID: 1801247618389264127, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: healthSystem
+      value: 
+      objectReference: {fileID: -1679240484897944605}
+    - target: {fileID: 1910325935143053819, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+--- !u!4 &7679878791693420258 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5302300179243410605, guid: edb65462e67d51f4cacfc60bdff3b9b9, type: 3}
+  m_PrefabInstance: {fileID: 2522549027971162703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7715324609650249475
 PrefabInstance:
   m_ObjectHideFlags: 0
