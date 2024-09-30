@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour
         if (lookForTargetTimer < 0)
         {
             lookForTargetTimer += lookForTargetTimerMax;
-            LookForStatic();
+            LookForTargets();
         }
     }
 
@@ -41,7 +41,7 @@ public class Tower : MonoBehaviour
             }
         }
     }
-    private void LookForStatic()
+    private void LookForTargets()
     {
         float targetMaxRadius = 20f;
         Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, targetMaxRadius);
