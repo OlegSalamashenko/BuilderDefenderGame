@@ -14,7 +14,7 @@ public class BuildingManager : MonoBehaviour
         public BuildingTypeSO activeBuildingType;
     }
 
-    [SerializeField] private Building building;
+    [SerializeField] private Building hqBuilding;
 
     private Camera mainCamera;
     private BuildingTypeListSO buildingTypeList;
@@ -29,7 +29,15 @@ public class BuildingManager : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        hqBuilding.GetComponent<HealthSystem>().OnDied += HQ_OnDied; ;
     }
+
+    private void HQ_OnDied(object sender, EventArgs e)
+    {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.GameOver);
+        GameOverUI.Instance.Show();
+    }
+
     void Update(){
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -41,6 +49,7 @@ public class BuildingManager : MonoBehaviour
                         ResourceManager.Instance.SpendResources(activeBuildingType.constructionResourceCostArray);
                         //Instantiate(activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
                         BuildingConstruction.Create(UtilsClass.GetMouseWorldPosition(), activeBuildingType);
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingPlaced);
                     }else{
                         TooltipUI.Instance.Show("Can not afford" + activeBuildingType.GetConstructionResourceCostString(),
                             new TooltipUI.TooltipTimer { timer = 2f });
@@ -107,6 +116,6 @@ public class BuildingManager : MonoBehaviour
 
     public Building GetHQBuilding()
     {
-         return building;
+         return hqBuilding;
     }
 }
